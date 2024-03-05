@@ -23,7 +23,11 @@ mongoose.connect(process.env.MONGO_URI)
 app.use(express.json());
 
 //Routes
+// product.createIndex({ productID: 1 }, function(err, result) {
+//     if (err) throw err;
 
+//     console.log('Index created successfully!');
+//   })
 // Seed Routes
 app.get('/seed', async (req, res) => {
     await product.deleteMany({});
@@ -33,9 +37,9 @@ app.get('/seed', async (req, res) => {
 });
 
 app.get("/", async (req, res) => {  
-    let result = await product.find({ $nor: [product] }).toArray();
+    let result = await product.find({ $nor: [product] });
     res.send(result).status(204);
-  });
+});
 
 
 app.get('/search', async (req, res) => {
@@ -56,8 +60,8 @@ app.get('/product', async(req, res) => {
 app.get("/product/:id", async(req, res) => {
     try {
         const {id} = req.params;
-        const product = await product.findById(id)
-        res.status(200).json(product);
+        const Product = await product.findById(id)
+        res.status(200).json(Product);
     } catch (error) {
         console.log(error.message);
         res.status(500).send('Not Found')
@@ -67,8 +71,8 @@ app.get("/product/:id", async(req, res) => {
 // POST request
 app.post('/newproduct', async(req, res) => {
     try {
-        const product = await product.create(req.body);
-        res.status(200).send(product);
+        const Product = await product.create(req.body);
+        res.status(200).send(Product);
     } catch (error) {
         console.log(error.message);
         res.status(500).send('Not Found')
@@ -95,11 +99,11 @@ app.put('/product/:id', async(req,res) => {
 app.delete('/product/:id', async(req,res) => {
     try {
         const {id} = req.params;
-        const product = await product.findByIdAndDelete(id);
+        const Product = await product.findByIdAndDelete(id);
         if(!product){
             return res.status(404).send({message: `Cannot find product with id: ${id}`});
         }
-        res.status(200).send(product);
+        res.status(200).send(Product);
     } catch (error) {
         console.log(error.message);
         res.status(500).send('Not Found');
