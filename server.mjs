@@ -1,8 +1,11 @@
 
 import express from 'express';
 import mongoose from 'mongoose';
-import product from './models/Product.js'
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
+import product from './models/Product.mjs';
+import products from './ultilities/data.js';
+import category from './models/Category.mjs';
+import order from './models/Order.mjs';
 
 dotenv.config();
 const app = express();
@@ -21,14 +24,25 @@ app.use(express.json());
 
 //Routes
 
-//Seed Routes
-// app.get('/seed', async (req, res) => {
-//     await Fruits.deleteMany({});
-//     await Fruits.create(fruits);
+// Seed Routes
+app.get('/seed', async (req, res) => {
+    await product.deleteMany({});
+    await product.create(products);
   
-//     res.send(`Database Seeded`);
-//   });
+    res.send(`Database Seeded`);
+});
 
+app.get("/", async (req, res) => {  
+    let result = await product.find({ $nor: [product] }).toArray();
+    res.send(result).status(204);
+  });
+
+
+app.get('/search', async (req, res) => {
+    const query = req.query.q;
+    const result = await product.find({ category: query }).exec();
+    res.json(result);
+});
 
 app.get('/product', async(req, res) => {
     try {
