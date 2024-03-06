@@ -1,12 +1,25 @@
 import mongoose from "mongoose";
 
-const OrderSchema = new Schema(
+const OrderSchema = new mongoose.Schema(
     {
-        line_items: Object,
+        item: Object,
         name: String,
-        email: String,
+        email: {
+            type: String,
+            validate: {
+                validator: function(v) {
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)
+                },
+                message: props => `${props.value} is not a valid email address.`
+            },
+        },
         address: String,
-        paid: Boolean,
+        
+        paid: {
+            type: Boolean,
+            required: true
+            }
+        
     }, 
     {
         timestamps: true,

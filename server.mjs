@@ -2,14 +2,13 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import product from './models/Product.mjs';
-import products from './ultilities/data.js';
-import category from './models/Category.mjs';
-import order from './models/Order.mjs';
+import products from './ultilities/data.mjs';
+import ProductRoute from './routes/ProductRoute.mjs'
+import OrderRoute from './routes/OrderRoute.mjs';
+import CategoryRoute from './routes/CategoryRoute.mjs'
 
 dotenv.config();
 const app = express();
-
 const port = process.env.port || 5000;
 
 mongoose.connect(process.env.MONGO_URI)
@@ -23,92 +22,25 @@ mongoose.connect(process.env.MONGO_URI)
 app.use(express.json());
 
 //Routes
-// product.createIndex({ productID: 1 }, function(err, result) {
-//     if (err) throw err;
+app.use('/category', CategoryRoute)
+app.use('/products', ProductRoute)
+app.use('/orders', OrderRoute)
 
-//     console.log('Index created successfully!');
-//   })
 // Seed Routes
 app.get('/seed', async (req, res) => {
-    await product.deleteMany({});
     await product.create(products);
-  
     res.send(`Database Seeded`);
 });
 
 app.get("/", async (req, res) => {  
-    let result = await product.find({ $nor: [product] });
-    res.send(result).status(204);
+    res.send('Homepage')
 });
-
 
 app.get('/search', async (req, res) => {
     const query = req.query.q;
     const result = await product.find({ category: query }).exec();
     res.json(result);
 });
-
-app.get('/product', async(req, res) => {
-    try {
-        const Products = await product.find({});
-        res.status(200).json(Products);
-    } catch (error) {
-        res.status(500).send('Not Found')
-    }
-})
-
-app.get("/product/:id", async(req, res) => {
-    try {
-        const {id} = req.params;
-        const Product = await product.findById(id)
-        res.status(200).json(Product);
-    } catch (error) {
-        console.log(error.message);
-        res.status(500).send('Not Found')
-    }
-})
-
-// POST request
-app.post('/newproduct', async(req, res) => {
-    try {
-        const Product = await product.create(req.body);
-        res.status(200).send(Product);
-    } catch (error) {
-        console.log(error.message);
-        res.status(500).send('Not Found')
-    }
-});
-
-//PUT Request
-app.put('/product/:id', async(req,res) => {
-    try {
-    const {id} = req.params;
-    const product = await product.findByIdAndUpdate(id, req.body);
-    if(!product) {
-        return res.status(404).send(`Cannot find any product with ${_id}`);
-    }
-    const updatedproduct = await product.findById(id)
-    res.status(200).json(updatedproduct);
-    } catch (error) {
-        console.log(error.message);
-        res.status(500).send('Not Found')
-    }
-});
-
-// DELETE Request
-app.delete('/product/:id', async(req,res) => {
-    try {
-        const {id} = req.params;
-        const Product = await product.findByIdAndDelete(id);
-        if(!product){
-            return res.status(404).send({message: `Cannot find product with id: ${id}`});
-        }
-        res.status(200).send(Product);
-    } catch (error) {
-        console.log(error.message);
-        res.status(500).send('Not Found');
-    };
-})
 
 // Error handling
 app.use((err, req, res, next) => {
