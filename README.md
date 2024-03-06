@@ -1,5 +1,6 @@
 <h1>Building a MongoDB Database App</h1>
-<p>A very simple server app that has products, category, and orders as data collections</p>
+<p>A very simple server app that has products, category, and orders as data collections</p><br>
+<h6>Still needs work on index queries</h6>
 <h3>Objectives</h3>
 <ul>
 :ballot_box_with_check: Create a server application with Node, Express, and MongoDB.<br>
