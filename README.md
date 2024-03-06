@@ -14,4 +14,5 @@
 <h4>Validation is within the Schema in models file</h4>
 <p>See below for test of validation: All price ending with .99 are accepted. Otherwise terminal will return error message</p>
 <img width="709" alt="Screenshot 2024-03-06 002210" src="https://github.com/linhdhng/SBA-319/assets/153128184/dda95146-464b-433c-8eef-6f08f341cc34">
-<img width="700" alt="Screenshot 2024-03-05 211738" src="https://github.com/linhdhng/SBA-319/assets/153128184/03d6b1a6-ced4-4105-b604-4ffbc63039fe">
+
+<img width="323" alt="Screenshot 2024-03-05 211945" src="https://github.com/linhdhng/SBA-319/assets/153128184/266a7227-a6ce-4788-8684-81a713839f57">
