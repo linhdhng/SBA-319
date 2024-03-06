@@ -2,7 +2,7 @@
 <p>A very simple server app that has products, category, and orders as data collections</p>
 <h3>Objectives</h3>
 <ul>
-(x)  <li>Create a server application with Node, Express, and MongoDB.</li>
+- [x] Create a server application with Node, Express, and MongoDB.</li>
 (x)  <li>Create a CRUD API using Express and MongoDB.</li>
 (x)  <li>Create MongoDB indexes.</li>
 ()   <li>Use MongoDB indexing to make efficient queries.</li>
