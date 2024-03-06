@@ -2,12 +2,12 @@
 <p>A very simple server app that has products, category, and orders as data collections</p>
 <h3>Objectives</h3>
 <ul>
-:ballot_box_with_check: Create a server application with Node, Express, and MongoDB.
-:ballot_box_with_check: Create a CRUD API using Express and MongoDB.
-:ballot_box_with_check: Create MongoDB indexes.
-:heavy_multiplication_x: Use MongoDB indexing to make efficient queries.
-:ballot_box_with_check: Create MongoDB validation rules.
-:ballot_box_with_check: Use MongoDB validation to ensure data consistency
+:ballot_box_with_check: Create a server application with Node, Express, and MongoDB.<br>
+:ballot_box_with_check: Create a CRUD API using Express and MongoDB.<br>
+:ballot_box_with_check: Create MongoDB indexes.<br>
+:heavy_multiplication_x: Use MongoDB indexing to make efficient queries.<br>
+:ballot_box_with_check: Create MongoDB validation rules.<br>
+:ballot_box_with_check: Use MongoDB validation to ensure data consistency.<br>
 </ul>
 
 <h4>Validation is within the Schema in models file</h4>
